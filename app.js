@@ -7,7 +7,30 @@ let dx = 2;
 let dy = -2;
 const paddleHeight = 12;
 const paddleWidth = 72;
-let paddleX = (canvas.width - paddleWidth)/2; //starting point for paddle on x axis
+let paddleX = (canvas.width - paddleWidth)/2; //starting point for paddle on x axis (sets in the middle)
+let rightPressed = false; //initialize value for player buttons
+let leftPressed = false;
+
+document.addEventListener("keydown", keyDownHandler, false); //event listener for key press
+document.addEventListener("keyup", keyUpHandler, false); //event listener for no key press/key up
+
+function keyDownHandler(e) {
+  if(e.keyCode == 39){ //if you are pressing down right mouse button (39) rightPressed is true
+    rightPressed = true;
+  }
+  else if(e.keyCode == 37){ //if you are pressing down let mouse button (37) leftPressed is true
+    leftPressed = true;
+  }
+}
+
+function keyUpHandler(e){
+  if(e.keyCode == 39){ //if you lift off the right mouse
+    rightPressed = false;
+  }
+  else if(e.keyCode == 37){ //if you lift off the left mouse button
+    leftPressed = false;
+  }
+}
 
 function drawBall() {
   ctx.beginPath();//start drawing
