@@ -15,19 +15,19 @@ document.addEventListener("keydown", keyDownHandler, false); //event listener fo
 document.addEventListener("keyup", keyUpHandler, false); //event listener for no key press/key up
 
 function keyDownHandler(e) {
-  if(e.keyCode == 39){ //if you are pressing down right mouse button (39) rightPressed is true
+  if(e.keyCode == 39){ //if you are pressing down right arrow button (39) rightPressed is true
     rightPressed = true;
   }
-  else if(e.keyCode == 37){ //if you are pressing down let mouse button (37) leftPressed is true
+  else if(e.keyCode == 37){ //if you are pressing down let arrow button (37) leftPressed is true
     leftPressed = true;
   }
 }
 
 function keyUpHandler(e){
-  if(e.keyCode == 39){ //if you lift off the right mouse
+  if(e.keyCode == 39){ //if you lift off the right arrow button
     rightPressed = false;
   }
-  else if(e.keyCode == 37){ //if you lift off the left mouse button
+  else if(e.keyCode == 37){ //if you lift off the left arrow button
     leftPressed = false;
   }
 }
@@ -59,6 +59,12 @@ function draw() {
   }
   if(y + dy > canvas.height - ballRadius || y + dy < ballRadius){ //bounce off top or bottom
     dy = -dy; //go the opposite way
+  }
+  if(rightPressed && paddleX < canvas.width - paddleWidth){
+    paddleX += 7; //if rightPressed move right 7px within canvas
+  }
+  else if(leftPressed && paddleX > 0){
+    paddleX -= 7; //if leftPressed move left 7px within canvas
   }
   x += dx; //define new coords for next frame
   y += dy;
