@@ -6,6 +6,7 @@ let dx = 2;
 let dy = -2;
 
 function drawBall() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height) //clear canvas each frame
   ctx.beginPath();//start drawing
   ctx.arc(x, y, 10, 0, Math.PI*2)
   //arc(x coord at center, y coord at center, radius, starting angle, ending angle, counterclockwise)
