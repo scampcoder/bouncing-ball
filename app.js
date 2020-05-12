@@ -5,6 +5,9 @@ let x = canvas.width/2;
 let y = canvas.height - 30; //new x and y will move ball
 let dx = 2;
 let dy = -2;
+const paddleHeight = 12;
+const paddleWidth = 72;
+let paddleX = (canvas.width - paddleWidth)/2; //starting point for paddle on x axis
 
 function drawBall() {
   ctx.beginPath();//start drawing
@@ -15,9 +18,19 @@ function drawBall() {
   ctx.closePath();//end drawing
 }
 
+function drawPaddle(){
+  ctx.beginPath();//start drawing
+  ctx.rect(paddleX, (canvas.height - paddleHeight), paddleWidth, paddleHeight);
+  //rect(x coord, y coord, width, height)
+  ctx.fillStyle = 'blue';//give color to paddle
+  ctx.fill();//actually fills the paddle
+  ctx.closePath();//end drawing
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height) //clear canvas each frame
   drawBall();
+  drawPaddle();
   if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){ //bounce off L or R sides
     dx = -dx; //go the opposite way
   }
