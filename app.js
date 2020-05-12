@@ -21,7 +21,7 @@ function draw() {
   if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){ //bounce off L or R sides
     dx = -dx; //go the opposite way
   }
-  if(y + dy > canvas.width - ballRadius || y + dy < ballRadius){ //bounce off top or bottom
+  if(y + dy > canvas.height - ballRadius || y + dy < ballRadius){ //bounce off top or bottom
     dy = -dy; //go the opposite way
   }
   x += dx; //define new coords for next frame
