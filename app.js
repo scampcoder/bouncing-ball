@@ -57,8 +57,17 @@ function draw() {
   if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){ //bounce off L or R sides
     dx = -dx; //go the opposite way
   }
-  if(y + dy > canvas.height - ballRadius || y + dy < ballRadius){ //bounce off top or bottom
+  if(y + dy < ballRadius){
     dy = -dy; //go the opposite way
+  }
+  else if(y + dy > canvas.height - ballRadius){ //bounce off top
+    if(x > paddleX && x < paddleX + paddleWidth){ //when ball touches paddle
+      dy = -dy; //go opposite way
+    }
+    else {
+      alert("GAME OVER");
+      document.location.reload();
+    }
   }
   if(rightPressed && paddleX < canvas.width - paddleWidth){
     paddleX += 7; //if rightPressed move right 7px within canvas
