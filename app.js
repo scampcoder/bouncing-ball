@@ -30,6 +30,7 @@ for(c=0; c<brickColumnCount; c++){ //make the brick columns
 
 document.addEventListener("keydown", keyDownHandler, false); //event listener for key press
 document.addEventListener("keyup", keyUpHandler, false); //event listener for no key press/key up
+document.addEventListener("mousemove", mouseMoveHandler, false);//event listener for mouse movement
 
 function keyDownHandler(e) {
   if(e.keyCode == 39){ //if you are pressing down right arrow button (39) rightPressed is true
@@ -47,6 +48,13 @@ function keyUpHandler(e){
   else if(e.keyCode == 37){ //if you lift off the left arrow button
     leftPressed = false;
   }
+}
+
+function mouseMoveHandler(e){ //anchor paddle to mouse movement
+  let relativeX = e.clientX - canvas.offsetLeft; //distance between canvas on left side of edge and mouse pointer
+    if(relativeX > 0 && relativeX < canvas.width){//if mouse is within canvas boundaries
+      paddleX = relativeX - paddleWidth/2; //move paddle on x-axis to position of mouse
+    }
 }
 
 function drawBall() {
@@ -85,6 +93,12 @@ function drawBricks(){
   }
 }
 
+function drawScore(){
+  ctx.font = "18px Arial";
+  ctx.fillStyle = "red";
+  ctx.fillText("score: " + score, 8, 20);//display "score" text at (8, 20)
+}
+
 function collisionDetection(){
   for(c=0; c<brickColumnCount; c++){
     for(r=0; r<brickRowCount; r++){
@@ -93,6 +107,11 @@ function collisionDetection(){
         if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){ //if you hit the brick
           dy = -dy; //go opposite way
           b.status = 0; //clear brick (is not drawn next frame)
+          score++; //increase score by 1
+          if(score == brickRowCount*brickColumnCount){
+            alert("Congratualtions!! You won!");
+            document.location.reload();
+          }
         }
       }
     }
@@ -104,6 +123,7 @@ function draw() {
   drawBricks()
   drawBall();
   drawPaddle();
+  drawScore();
   collisionDetection();
 
   if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){ //bounce off L or R sides
