@@ -66,6 +66,22 @@ function drawPaddle(){
   ctx.closePath();//end drawing
 }
 
+function drawBricks(){
+  for(c=0; c<brickColumnCount; c++){ //for each column up to set columns
+    for(r=0; r<brickRowCount; r++){ //for each row up to set rows
+      let brickX = (c*(brickWidth + brickPadding)) + brickOffsetLeft; //x position = column num * (bw + bp) + space on left
+      let brickY = (r*(brickHeight + brickPadding)) + brickOffsetTop; //y position = row num * (bh + bp) + space on top
+      bricks[c][r].x = brickX; //new x coord
+      bricks[c][r].y = brickY; //new y coord
+      ctx.beginPath(); //start drawing
+      ctx.rect(brickX, brickY, brickWidth, brickHeight); //build shape of brick
+      ctx.fillStyle = #6600cc; //color for brick
+      ctx.fill(); //fill brick with set color
+      ctx.closePath(); //stop drawing
+    }
+  }
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height) //clear canvas each frame
   drawBall();
