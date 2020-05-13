@@ -11,8 +11,8 @@ let paddleX = (canvas.width - paddleWidth)/2; //starting point for paddle on x a
 let rightPressed = false; //initialize value for player buttons
 let leftPressed = false;
 
-const brickRowCount = 4;
-const brickColumnCount = 7;
+const brickRowCount = 6;
+const brickColumnCount = 6;
 const brickWidth = 80;
 const brickHeight = 24;
 const brickPadding = 12;
