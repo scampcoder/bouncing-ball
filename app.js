@@ -23,7 +23,7 @@ let bricks = []; //initialize empty bricks array
 for(c=0; c<brickColumnCount; c++){ //make the brick columns
   bricks[c] = [];
   for(r=0; r<brickRowCount; r++){ //make the brick rows
-    bricks[c][r] = {x: 0, y: 0}; //set each brick at (0, 0)
+    bricks[c][r] = {x: 0, y: 0, status: 1}; //set each brick at (0, 0) set created brick status to 1
   }
 }
 
@@ -87,7 +87,7 @@ function collisionDetection(){
     for(r=0; r<brickRowCount; r++){
       let b = bricks[c][r]; //store each brick object
       if(b.status == 1){//brick is present
-        if(x > b.x && x < b.x + brickWidth && y > b.y + brickHeight){ //if you hit the brick
+        if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){ //if you hit the brick
           dy = -dy; //go opposite way
           b.status = 0; //clear brick (is not drawn next frame)
         }
@@ -98,9 +98,11 @@ function collisionDetection(){
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); //clear canvas each frame
+  drawBricks()
   drawBall();
   drawPaddle();
-  drawBricks();
+  collisionDetection();
+
   if(x + dx > canvas.width - ballRadius || x + dx < ballRadius){ //bounce off L or R sides
     dx = -dx; //go the opposite way
   }
