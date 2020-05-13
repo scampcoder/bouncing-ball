@@ -18,8 +18,9 @@ const brickHeight = 24;
 const brickPadding = 12;
 const brickOffsetTop = 32;
 const brickOffsetLeft = 32;
-
 let bricks = []; //initialize empty bricks array
+let score = 0; //initialize score to 0
+
 for(c=0; c<brickColumnCount; c++){ //make the brick columns
   bricks[c] = [];
   for(r=0; r<brickRowCount; r++){ //make the brick rows
@@ -69,6 +70,7 @@ function drawPaddle(){
 function drawBricks(){
   for(c=0; c<brickColumnCount; c++){ //for each column up to set columns
     for(r=0; r<brickRowCount; r++){ //for each row up to set rows
+      if(bricks[c][r].status == 1) {
       let brickX = (c*(brickWidth + brickPadding)) + brickOffsetLeft; //x position = column num * (bw + bp) + space on left
       let brickY = (r*(brickHeight + brickPadding)) + brickOffsetTop; //y position = row num * (bh + bp) + space on top
       bricks[c][r].x = brickX; //new x coord
@@ -78,6 +80,7 @@ function drawBricks(){
       ctx.fillStyle = "#6600cc"; //color for brick
       ctx.fill(); //fill brick with set color
       ctx.closePath(); //stop drawing
+      }
     }
   }
 }
