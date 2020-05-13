@@ -11,6 +11,22 @@ let paddleX = (canvas.width - paddleWidth)/2; //starting point for paddle on x a
 let rightPressed = false; //initialize value for player buttons
 let leftPressed = false;
 
+const brickRowCount = 4;
+const brickColumnCount = 7;
+const brickWidth = 80;
+const brickHeight = 24;
+const brickPadding = 12;
+const brickOffsetTop = 32;
+const brickOffsetLeft = 32;
+
+let bricks = []; //initialize empty bricks array
+for(c=0; c<brickColumnCount; c++){ //make the brick columns
+  bricks[c] = [];
+  for(r=0; r<brickRowCount; r++){ //make the brick rows
+    bricks[c][r] = {x: 0, y: 0}; //set each brick at (0, 0)
+  }
+}
+
 document.addEventListener("keydown", keyDownHandler, false); //event listener for key press
 document.addEventListener("keyup", keyUpHandler, false); //event listener for no key press/key up
 
