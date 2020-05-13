@@ -82,6 +82,20 @@ function drawBricks(){
   }
 }
 
+function collisionDetection(){
+  for(c=0; c<brickColumnCount; c++){
+    for(r=0; r<brickRowCount; r++){
+      let b = bricks[c][r]; //store each brick object
+      if(b.status == 1){//brick is present
+        if(x > b.x && x < b.x + brickWidth && y > b.y + brickHeight){ //if you hit the brick
+          dy = -dy; //go opposite way
+          b.status = 0; //clear brick (is not drawn next frame)
+        }
+      }
+    }
+  }
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); //clear canvas each frame
   drawBall();
